@@ -35,11 +35,11 @@ jobs:
       - name: Build
         run: yarn build
 
-      - name: Install deps and build in example
+      - name: Example - Install deps and build
         uses: bahmutov/npm-install@v1
         with:
           working-directory: example
 
-      - name: Build
+      - name: Example - Build
         working-directory: example
         run: yarn build
