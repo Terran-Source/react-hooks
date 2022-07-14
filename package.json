@@ -1,7 +1,7 @@
 {
   "name": "@terran-source/hooks",
   "version": "0.1.0",
-  "description": "Some hooks",
+  "description": "Some reactive hooks",
   "license": "MIT",
   "author": "Tamal Patra",
   "repository": {
