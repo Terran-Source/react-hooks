@@ -10,6 +10,7 @@ on:
         required: true
         type: string
         description: OS environment
+    secrets: inherit
 
 jobs:
   build:
