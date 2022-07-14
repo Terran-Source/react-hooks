@@ -11,7 +11,7 @@ env:
 
 jobs:
   prepare:
-    name: Setup Node ${{ matrix.node }} on ${{ matrix.os }}
+    name: Run CI for Node ${{ matrix.node }} on ${{ matrix.os }}
 
     strategy:
       matrix:
@@ -21,8 +21,7 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-      - name: Checkout repo
-        uses: ./.github/workflows/build.yml
+      - uses: ./.github/workflows/build.yml
         with:
           node: ${{ matrix.node }}
           os: ${{ matrix.os }}
