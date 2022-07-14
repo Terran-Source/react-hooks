@@ -41,7 +41,9 @@ jobs:
           cache: yarn
 
       - name: Install deps and build (with cache)
-        run: yarn install --frozen-lockfile --ignore-scripts
+        uses: bahmutov/npm-install@v1
+        with:
+          install-command: yarn install --frozen-lockfile --ignore-scripts
 
       - name: Lint
         run: yarn lint
