@@ -33,14 +33,13 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Use Node ${{ matrix.node }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
+          cache: yarn
 
       - name: Install deps and build (with cache)
-        uses: bahmutov/npm-install@v1
-        with:
-          install-command: yarn install --frozen-lockfile --ignore-scripts
+        run: yarn install --frozen-lockfile --ignore-scripts
 
       - name: Lint
         run: yarn lint
@@ -61,7 +60,7 @@ jobs:
         working-directory: example
 
       - name: Publish
-        # if: ${{ github.event_name == 'release' && matrix.node == '12.x' && matrix.os == 'ubuntu-latest' }}
-        if: ${{ github.event_name == 'pull_request' && matrix.node == '12.x' && matrix.os == 'ubuntu-latest' }}
+        if: ${{ github.event_name == 'release' && matrix.node == '12.x' && matrix.os == 'ubuntu-latest' }}
+        # if: ${{ github.event_name == 'pull_request' && matrix.node == '12.x' && matrix.os == 'ubuntu-latest' }}
         run: |
           echo 'Under Publish'
