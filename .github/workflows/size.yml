@@ -2,7 +2,7 @@ name: size
 on: [pull_request]
 jobs:
   size:
-    name: 'Check size-limit in PR #${{ github.event.number }}'
+    name: 'PR #${{ github.event.number }}: Check Size Limit'
     runs-on: ubuntu-latest
     env:
       CI_JOB_NUMBER: ${{ github.event.number }}
