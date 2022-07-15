@@ -1,0 +1,11 @@
+{
+  "cSpell.ignorePaths": [
+    "yarn.lock",
+    "node_modules",
+    "vscode-extension",
+    ".git/objects",
+    ".vscode",
+    ".vscode-insiders"
+  ],
+  "cSpell.words": ["bahmutov", "npmrc"]
+}

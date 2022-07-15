@@ -1,0 +1,81 @@
+name: Build
+on:
+  workflow_call:
+    inputs:
+      node:
+        required: true
+        type: string
+        description: Node version
+      os:
+        required: true
+        type: string
+        description: OS environment
+      example_directory:
+        default: example
+        required: false
+        type: string
+        description: example directory path
+      release:
+        default: false
+        required: false
+        type: boolean
+        description: Release batch
+    secrets: inherit
+
+jobs:
+  build:
+    name: lint test build on Node ${{ inputs.node }} and ${{ inputs.os }}
+
+    runs-on: ${{ inputs.os }}
+
+    steps:
+      - name: Intro
+        shell: bash
+        env:
+          CUR_EVENT: ${{ toJSON(github.event) }}
+        run: |
+          echo $CUR_EVENT > event_detail.txt
+          cat event_detail.txt
+          rm -f event_detail.txt
+          echo 'EventName: ${{ github.event_name }}'
+          echo 'Ref: ${{ github.ref }}'
+          echo 'RefName: ${{ github.ref_name }}'
+          echo 'RefType: ${{ github.ref_type }}'
+
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Use Node ${{ inputs.node }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ inputs.node }}
+
+      - name: Install deps and build (with cache)
+        uses: bahmutov/npm-install@v1
+        with:
+          install-command: yarn install --frozen-lockfile --ignore-scripts
+
+      - name: Lint
+        run: yarn lint
+
+      - name: Test
+        run: yarn test --ci --coverage --maxWorkers=2
+
+      - name: Build
+        run: yarn build
+
+      - name: Example - Install deps and build
+        if: ${{ !inputs.release }}
+        uses: bahmutov/npm-install@v1
+        with:
+          working-directory: ${{ inputs.example_directory }}
+
+      - name: Example - Build
+        if: ${{ !inputs.release }}
+        run: yarn build
+        working-directory: ${{ inputs.example_directory }}
+
+      - name: Publish
+        if: ${{ inputs.release }}
+        run: |
+          echo 'Under Publish'

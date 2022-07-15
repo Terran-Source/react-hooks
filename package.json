@@ -1,6 +1,7 @@
 {
   "name": "@terran-source/hooks",
-  "version": "0.1.0",
+  "version": "0.1.1",
+  "description": "Some react hooks",
   "license": "MIT",
   "author": "Tamal Patra",
   "repository": {
@@ -17,16 +18,20 @@
     "src"
   ],
   "engines": {
-    "node": ">=10"
+    "node": ">=12"
   },
   "scripts": {
     "clean": "rm -rf dist",
+    "clean-deep": "rm -rf dist node_modules .husky",
+    "refresh": "yarn run clean .husky yarn.lock yarn-error.log node_modules && yarn install",
     "start": "tsdx watch",
     "build": "tsdx build",
     "test": "tsdx test --passWithNoTests",
     "lint": "tsdx lint",
-    "prepare": "tsdx build",
-    "size": "size-limit",
+    "husky:pre-commit": "husky add .husky/pre-commit 'yarn lint && yarn test'",
+    "prepare": "husky install && yarn husky:pre-commit && tsdx build",
+    "pre-size": "yarn run clean-deep && yarn install --frozen-lockfile --ignore-scripts && yarn build",
+    "size": "size-limit --json",
     "analyze": "size-limit --why"
   },
   "peerDependencies": {
@@ -34,7 +39,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "tsdx lint"
+      "pre-commit": "yarn lint && yarn test"
     }
   },
   "prettier": {
@@ -56,14 +61,14 @@
   ],
   "devDependencies": {
     "@size-limit/preset-small-lib": "^7.0.8",
-    "@types/react": "^18.0.15",
-    "@types/react-dom": "^18.0.6",
-    "husky": "^8.0.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "@types/react": "*",
+    "@types/react-dom": "*",
+    "husky": "^7.0.4",
+    "react": "*",
+    "react-dom": "*",
     "size-limit": "^7.0.8",
     "tsdx": "^0.14.1",
     "tslib": "^2.4.0",
-    "typescript": "^4.7.4"
+    "typescript": "*"
   }
 }

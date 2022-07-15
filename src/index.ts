@@ -1,1 +1,3 @@
-export * from './useDebounce'
+import useDebounce from './useDebounce'
+
+export { useDebounce }

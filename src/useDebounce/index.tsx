@@ -5,14 +5,17 @@ const useDebounce = (
   delay: number,
   debug = false
 ) => {
-  let [timer, setTimer] = useState(setTimeout(() => {}, 0))
+  let [timer, setTimer] = useState<NodeJS.Timeout | number | null>(null)
 
-  useEffect(() => {
-    return () => clearTimeout(timer)
-  }, [])
+  useEffect(
+    () => () => {
+      timer && clearTimeout(timer)
+    },
+    []
+  )
 
   const debounce = async (...args: any[]) => {
-    clearTimeout(timer)
+    timer && clearTimeout(timer)
     setTimer(
       setTimeout(() => {
         callback(...args)
