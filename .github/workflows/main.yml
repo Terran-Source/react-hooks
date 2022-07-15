@@ -25,7 +25,7 @@ jobs:
     steps:
       - name: Intro
         run: |
-          echo 'Event: ${{ toJSON(github.event) }}'
+          # echo 'Event: ${{ toJSON(github.event) }}'
           echo 'EventName: ${{ github.event_name }}'
           echo 'Ref: ${{ github.ref }}'
           echo 'RefName: ${{ github.ref_name }}'
