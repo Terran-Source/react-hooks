@@ -30,8 +30,13 @@ jobs:
 
     steps:
       - name: Intro
+        shell: bash
+        env:
+          CUR_EVENT: ${{ toJSON(github.event) }}
         run: |
-          echo 'Event: ${{ toJSON(github.event) }}'
+          echo $CUR_EVENT > event_detail.txt
+          cat event_detail.txt
+          rm -f event_detail.txt
           echo 'EventName: ${{ github.event_name }}'
           echo 'Ref: ${{ github.ref }}'
           echo 'RefName: ${{ github.ref_name }}'
@@ -73,7 +78,4 @@ jobs:
       - name: Publish
         if: ${{ inputs.release }}
         run: |
-          echo 'EventName: ${{ github.event_name }}'
-          echo 'Ref: ${{ github.ref }}'
-          echo 'RefName: ${{ github.ref_name }}'
-          echo 'RefType: ${{ github.ref_type }}'
+          echo 'Under Publish'

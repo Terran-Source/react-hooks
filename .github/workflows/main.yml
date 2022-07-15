@@ -5,15 +5,20 @@ on:
     branches:
       - main
       - dev
+      - 'release/**'
   release:
     types: [published]
 
 env:
   GIT_PKG_PUBLISH_TOKEN: ${{ secrets.PKG_PUBLISH_TOKEN }}
 
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   run-matrix:
-    name: Run CI for Node ${{ matrix.node }} on ${{ matrix.os }}
+    name: 'CI: Node: v${{ matrix.node }} on ${{ matrix.os }}'
 
     strategy:
       matrix:
