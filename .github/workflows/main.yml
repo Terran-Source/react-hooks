@@ -37,7 +37,7 @@ jobs:
           cat event_detail.txt
           rm -f event_detail.txt
           echo 'EventName: ${{ github.event_name }}'
-          echo 'Action: ${{ github.action }}'
+          echo 'Workflow: ${{ env.GITHUB_WORKFLOW }}'
           echo 'Ref: ${{ github.ref }}'
           echo 'RefName: ${{ github.ref_name }}'
           echo 'RefType: ${{ github.ref_type }}'
