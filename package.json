@@ -22,6 +22,7 @@
   },
   "scripts": {
     "clean": "rm -rf dist",
+    "clean-deep": "rm -rf dist node_modules .husky",
     "refresh": "yarn run clean .husky yarn.lock yarn-error.log node_modules && yarn install",
     "start": "tsdx watch",
     "build": "tsdx build",
@@ -29,7 +30,7 @@
     "lint": "tsdx lint",
     "husky:pre-commit": "husky add .husky/pre-commit 'yarn lint && yarn test'",
     "prepare": "husky install && yarn husky:pre-commit && tsdx build",
-    "pre-size": "yarn install --frozen-lockfile --ignore-scripts && yarn build",
+    "pre-size": "yarn run clean-deep && yarn install --frozen-lockfile --ignore-scripts && yarn build",
     "size": "size-limit --json",
     "analyze": "size-limit --why"
   },
