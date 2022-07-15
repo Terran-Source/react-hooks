@@ -29,7 +29,8 @@
     "test": "tsdx test --passWithNoTests",
     "lint": "tsdx lint",
     "husky:pre-commit": "husky add .husky/pre-commit 'yarn lint && yarn test'",
-    "prepare": "husky install && yarn husky:pre-commit && tsdx build",
+    "prepare-once": "husky install && yarn husky:pre-commit && yarn build",
+    "prepare": "yarn build",
     "pre-size": "yarn run clean-deep && yarn install --frozen-lockfile --ignore-scripts && yarn build",
     "size": "size-limit --json",
     "analyze": "size-limit --why"
@@ -43,12 +44,12 @@
     }
   },
   "prettier": {
-    "printWidth": 80,
+    "printWidth": 90,
     "semi": false,
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "module": "dist/hooks.esm.js",
+  "module": "dist/index.esm.js",
   "size-limit": [
     {
       "path": "dist/hooks.cjs.production.min.js",

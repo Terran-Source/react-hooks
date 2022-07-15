@@ -7,5 +7,5 @@
     ".vscode",
     ".vscode-insiders"
   ],
-  "cSpell.words": ["bahmutov", "npmrc"]
+  "cSpell.words": ["bahmutov", "npmrc", "trailingcomma"]
 }
