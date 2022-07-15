@@ -5,7 +5,7 @@ jobs:
     name: 'PR #${{ github.event.number }}: Check Size Limit'
     runs-on: ubuntu-latest
     env:
-      CI_JOB_NUMBER: ${{ github.event.number }}
+      CI_JOB_NUMBER: 1
     steps:
       - uses: actions/checkout@v1
       - name: Check Size-Limit
