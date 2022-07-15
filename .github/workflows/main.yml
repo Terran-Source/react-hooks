@@ -94,6 +94,6 @@ jobs:
         # run: yarn publish
         run: |
           echo 'Under Publish'
-          cat ${{NPM_CONFIG_USERCONFIG}}
+          cat ${{ env.NPM_CONFIG_USERCONFIG }}
         env:
           NODE_AUTH_TOKEN: ${{ env.GIT_PKG_PUBLISH_TOKEN }}
