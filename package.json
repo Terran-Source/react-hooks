@@ -52,11 +52,23 @@
   "module": "dist/index.esm.js",
   "size-limit": [
     {
-      "path": "dist/hooks.cjs.production.min.js",
+      "path": "dist/_virtual/",
       "limit": "10 KB"
     },
     {
-      "path": "dist/hooks.esm.js",
+      "path": "dist/index.js",
+      "limit": "1 KB"
+    },
+    {
+      "path": "dist/index.esm.js",
+      "limit": "1 KB"
+    },
+    {
+      "path": "dist/useDebounce/index.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/useDebounce/index.esm.js",
       "limit": "10 KB"
     }
   ],
