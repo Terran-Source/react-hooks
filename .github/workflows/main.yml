@@ -13,7 +13,7 @@ env:
   GIT_PKG_PUBLISH_TOKEN: ${{ secrets.PKG_PUBLISH_TOKEN }}
 
 concurrency:
-  group: ${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -37,9 +37,19 @@ jobs:
           cat event_detail.txt
           rm -f event_detail.txt
           echo 'EventName: ${{ github.event_name }}'
+          echo 'Workflow: ${{ github.workflow }}'
           echo 'Ref: ${{ github.ref }}'
           echo 'RefName: ${{ github.ref_name }}'
           echo 'RefType: ${{ github.ref_type }}'
+
+      - name: Check if `Release`
+        id: check_release
+        if: >-
+          github.event_name == 'release' &&
+          matrix.node == '12.x' &&
+          matrix.os == 'ubuntu-latest'
+        run: |
+          echo "::set-output name=release::true"
 
       - name: Checkout repo
         uses: actions/checkout@v2
@@ -73,11 +83,18 @@ jobs:
         run: yarn build
         working-directory: example
 
+      # Setup .npmrc file to publish to GitHub Packages
+      - name: Setup Publish
+        if: ${{ steps.check_release.outputs.release == 'true' }}
+        uses: actions/setup-node@v3
+        with:
+          registry-url: 'https://npm.pkg.github.com'
+
       - name: Publish
-        if: >-
-          github.event_name == 'release' &&
-          matrix.node == '12.x' &&
-          matrix.os == 'ubuntu-latest'
-        # if: ${{ github.event_name == 'pull_request' && matrix.node == '12.x' && matrix.os == 'ubuntu-latest' }}
-        run: |
-          echo 'Under Publish'
+        if: ${{ steps.check_release.outputs.release == 'true' }}
+        # run: |
+        #   echo 'Under Publish'
+        #   cat ${{ env.NPM_CONFIG_USERCONFIG }}
+        run: yarn publish
+        env:
+          NODE_AUTH_TOKEN: ${{ env.GIT_PKG_PUBLISH_TOKEN }}
