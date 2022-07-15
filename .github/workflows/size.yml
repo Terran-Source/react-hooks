@@ -2,9 +2,10 @@ name: size
 on: [pull_request]
 jobs:
   size:
+    name: Check size-limit in PR \#${{ github.event.number }}
     runs-on: ubuntu-latest
     env:
-      CI_JOB_NUMBER: 1
+      CI_JOB_NUMBER: ${{ github.event.number }}
     steps:
       - uses: actions/checkout@v1
       - uses: andresz1/size-limit-action@v1

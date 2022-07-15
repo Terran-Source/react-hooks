@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - dev
+      - 'release/**'
   release:
     types: [published]
 
@@ -13,7 +14,7 @@ env:
 
 jobs:
   run-matrix:
-    name: Run CI for Node ${{ matrix.node }} on ${{ matrix.os }}
+    name: 'CI: Node: v${{ matrix.node }} on ${{ matrix.os }}'
 
     strategy:
       matrix:
