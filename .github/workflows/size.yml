@@ -1,5 +1,11 @@
 name: size
+
 on: [pull_request]
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   size:
     name: 'PR #${{ github.event.number }}: Check Size Limit'

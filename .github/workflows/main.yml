@@ -12,6 +12,10 @@ on:
 env:
   GIT_PKG_PUBLISH_TOKEN: ${{ secrets.PKG_PUBLISH_TOKEN }}
 
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   run-matrix:
     name: 'CI: Node: v${{ matrix.node }} on ${{ matrix.os }}'
