@@ -29,7 +29,8 @@
     "lint": "tsdx lint",
     "husky:pre-commit": "husky add .husky/pre-commit 'yarn lint && yarn test'",
     "prepare": "husky install && yarn husky:pre-commit && tsdx build",
-    "size": "size-limit",
+    "pre-size": "yarn install --frozen-lockfile --ignore-scripts && yarn build",
+    "size": "size-limit --json",
     "analyze": "size-limit --why"
   },
   "peerDependencies": {
