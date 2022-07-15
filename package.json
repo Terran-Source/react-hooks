@@ -57,11 +57,11 @@
     },
     {
       "path": "dist/index.js",
-      "limit": "1 KB"
+      "limit": "5 KB"
     },
     {
       "path": "dist/index.esm.js",
-      "limit": "1 KB"
+      "limit": "5 KB"
     },
     {
       "path": "dist/useDebounce/index.js",
