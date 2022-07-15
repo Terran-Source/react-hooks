@@ -13,7 +13,7 @@ env:
   GIT_PKG_PUBLISH_TOKEN: ${{ secrets.PKG_PUBLISH_TOKEN }}
 
 concurrency:
-  group: CI-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
