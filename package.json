@@ -43,6 +43,7 @@
       "pre-commit": "yarn lint && yarn test"
     }
   },
+  "browserslist": "> 0.25%, not dead",
   "prettier": {
     "printWidth": 90,
     "semi": false,

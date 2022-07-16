@@ -6,16 +6,24 @@ module.exports = {
    * @returns InputOptions
    */
   rollup: (config, options) => {
+    // console.info({ node_env: process.env.NODE_ENV })
     // console.info(options)
     // console.info(config.plugins)
-    config.preserveModules = true
-    config.output.dir = './dist/'
-    config.output.sourcemap = false
-    delete config.output.file
-    if ('esm' === options.format) {
-      config.output.entryFileNames = '[name].esm.js'
+
+    const { file: _, ...output } = {
+      ...config.output,
+      dir: './dist/',
+      sourcemap: false,
     }
-    // console.info(config.output)
-    return config
+    if ('esm' === options.format) {
+      output.entryFileNames = '[name].esm.js'
+    }
+    // console.info(output)
+
+    return {
+      ...config,
+      preserveModules: true,
+      output,
+    }
   },
 }
