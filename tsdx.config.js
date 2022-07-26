@@ -1,3 +1,5 @@
+const isProd = process.env.NODE_ENV === 'production'
+
 module.exports = {
   /**
    *
@@ -14,6 +16,7 @@ module.exports = {
       ...config.output,
       dir: './dist/',
       sourcemap: false,
+      minimize: isProd,
     }
     if ('esm' === options.format) {
       output.entryFileNames = '[name].esm.js'

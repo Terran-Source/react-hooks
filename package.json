@@ -14,8 +14,7 @@
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "engines": {
     "node": ">=12"
@@ -29,7 +28,7 @@
     "test": "tsdx test --passWithNoTests",
     "lint": "tsdx lint",
     "husky:pre-commit": "husky add .husky/pre-commit 'yarn lint && yarn test'",
-    "prepare-once": "husky install && yarn husky:pre-commit && yarn build",
+    "prepare-once": "husky install && yarn run husky:pre-commit && yarn build",
     "prepare": "yarn build",
     "pre-size": "yarn run clean-deep && yarn install --frozen-lockfile --ignore-scripts && yarn build",
     "size": "size-limit --json",

@@ -95,3 +95,4 @@ jobs:
         run: yarn publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PKG_PUBLISH_TOKEN }}
+          NODE_ENV: production
