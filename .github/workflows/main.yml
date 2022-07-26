@@ -3,7 +3,6 @@ on:
   push:
   pull_request:
     branches:
-      - main
       - dev
       - 'release/**'
   release:
@@ -96,3 +95,4 @@ jobs:
         run: yarn publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PKG_PUBLISH_TOKEN }}
+          NODE_ENV: production
