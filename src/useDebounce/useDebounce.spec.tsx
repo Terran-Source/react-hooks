@@ -21,7 +21,7 @@ describe('useDebounce', () => {
     const div = document.createElement('div')
     ReactDOM.render(<Dummy />, div)
     ReactDOM.unmountComponentAtNode(div)
-    // ! until react fix their own mess
+    // ! until react/jest fix their own mess
     // const root = createRoot(div!)
     // root.render(<Dummy />)
     // root.unmount()
