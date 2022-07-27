@@ -1,7 +1,7 @@
 import 'react-app-polyfill/ie11'
 import React, { useState } from 'react'
 import { createRoot } from 'react-dom/client'
-import { useDebounce } from '../dist'
+import { useDebounce } from '@terran-source/hooks'
 
 const inputId = 'txtType'
 
